@@ -3,7 +3,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import { provide } from '@angular/core';
 import { XHRBackend } from '@angular/http';
 import { InMemoryBackendService, SEED_DATA } from 'angular2-in-memory-web-api';
-// import { InMemoryDataService } from './in-memory-data.service';
+import { InMemoryDataService } from './in-memory-data.service';
 // import { AppComponent } from './app.component';
 import { GLComponent } from './gl.component';
 // import {enableProdMode} from '@angular/core';
@@ -12,6 +12,7 @@ import { GLComponent } from './gl.component';
   bootstrap (GLComponent);
 // let debug = true;
 // if (debug) {
+//   bootstrap (GLComponent);
 // } else {
 // bootstrap(AppComponent, [HTTP_PROVIDERS, provide(XHRBackend, {
 //     useClass: InMemoryBackendService
