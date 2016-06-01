@@ -1,1 +1,15 @@
+bower_components/
+node_modules/
+hooks/
+platforms/
+plugins/
+scss/
+src/generated/
+www/
+npm-debug.log
+app/**/*.js
+app/**/*.map
+src/lib/**/*.js
+src/lib/**/*.map
 screens/**/*.png
+typings/
