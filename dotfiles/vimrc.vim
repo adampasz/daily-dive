@@ -32,7 +32,6 @@ set colorcolumn=120
 
 
 syntax on
-colorscheme firewatch
 
 " make cursorlines brighter in insert mode
 autocmd InsertEnter * hi CursorLine ctermbg=17 guibg=#222232
@@ -65,3 +64,14 @@ nmap <leader>X ggVG !xmllint --format -<CR>
 " load .vimrc.local iff it exists 
 
 command W w
+
+
+""""""""""""""
+" SOURCE OTHER RC FILES HERE 
+""""""""""""""
+if filereadable(expand("~/.vim/rcs/ts-vimrc.vim"))
+  source ~/.vim/rcs/ts-vimrc.vim
+endif
+
+
+
