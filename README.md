@@ -18,6 +18,16 @@ Look in the "episodes" folder for details on particular show.
 
 Also, for now, each episode will have its own branch so it will be easy to go back and enjoy a particular show.
 
+## Schedule 
+* Schedule GMT
+  18:50 - prep. offline
+  19:00 - Scheduling next eps., plan today's show
+  19:10 - Featured Item or Hot Topic of Day 
+  19:20 - Break - check email
+  19:25 - Dive into main topic for the day
+  20:00 - Chat Q&A, tie up loose ends, plan next show
+  
+
 ## Prerequisites
 *Please note, my personal bias is toward using Vim and other command line tools, so that is what I will focus on during the show. Religious battles aside, it is important for most developers to have at least a passing familiarity with these tools. Once you have learned them, you can make an informed decision as to whether they are right for you.*
 
