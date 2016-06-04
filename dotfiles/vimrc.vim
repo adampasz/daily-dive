@@ -29,8 +29,6 @@ set cursorline
 set cursorcolumn
 set colorcolumn=120
 
-
-
 syntax on
 
 " make cursorlines brighter in insert mode
@@ -56,15 +54,11 @@ let mapleader = "\\"
 nmap <silent> <leader>- :bd<CR>  
 nmap <silent> <leader>= :wincmd w<CR>
 nmap <silent> <leader>+ :only<CR>
-nmap <silent> <leader>h :so $VIMRUNTIME/syntax/hitest.vim<CR>
 let mapleader = ","
 nmap <leader>V :source $MYVIMRC<CR>
 nmap <leader>v :tabedit $MYVIMRC<CR>
-nmap <leader>X ggVG !xmllint --format -<CR>
-" load .vimrc.local iff it exists 
 
 command W w
-
 
 """"""""""""""
 " SOURCE OTHER RC FILES HERE 
@@ -73,5 +67,7 @@ if filereadable(expand("~/.vim/rcs/ts-vimrc.vim"))
   source ~/.vim/rcs/ts-vimrc.vim
 endif
 
-
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
 
