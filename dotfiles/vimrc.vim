@@ -64,7 +64,7 @@ command W w
 " SOURCE OTHER RC FILES HERE 
 """"""""""""""
 if filereadable(expand("~/.vim/rcs/ts-vimrc.vim"))
-  source ~/.vim/rcs/ts-vimrc.vim
+  source ~/.vim/rcs/js-vimrc.vim
 endif
 
 if filereadable(expand("~/.vimrc.local"))

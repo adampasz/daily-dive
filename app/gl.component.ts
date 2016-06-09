@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Engine} from './gl/engine';
-//import {IShaderProps} from './gl/shader';
+ mport {IShaderProps} from './gl/shader';
 
 @Component({
   selector: 'gl',
