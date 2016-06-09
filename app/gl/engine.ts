@@ -15,7 +15,7 @@ export class Engine {
       context = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
       if (context instanceof WebGLRenderingContext) {
         this.gl = context;
-        this.gl.clearColor(0.0, 0.8, 0.0, 1.0);
+        this.gl.clearColor(0.0, 0.0, 0.5, 1.0);
         success = true;
       }
     } catch(e) {

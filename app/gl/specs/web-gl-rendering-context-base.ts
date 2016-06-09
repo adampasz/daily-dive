@@ -1,6 +1,6 @@
 import {GLenum} from './web-gl-enums';
 
-//https://www.khronos.org/registry/webgl/specs/latest/1.0/
+// https://www.khronos.org/registry/webgl/specs/latest/1.0/
 //TODO: figure out if/how to add 2.0 interface
 export interface WebGLRenderingContext {
   /* ClearBufferMask */
