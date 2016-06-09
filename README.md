@@ -20,12 +20,12 @@ Also, for now, each episode will have its own branch so it will be easy to go ba
 
 ## Schedule 
 * Schedule GMT
-  18:50 - prep. offline
-  19:00 - Scheduling next eps., plan today's show
-  19:10 - Featured Item or Hot Topic of Day 
-  19:20 - Break - check email
-  19:25 - Dive into main topic for the day
-  20:00 - Chat Q&A, tie up loose ends, plan next show
+18:50 | prep. offline
+19:00 | Scheduling next eps., plan today's show
+19:10 | Featured Item or Hot Topic of Day 
+19:20 | Break - check email
+19:25 | Dive into main topic for the day
+20:00 | Chat Q&A, tie up loose ends, plan next show
   
 
 ## Prerequisites

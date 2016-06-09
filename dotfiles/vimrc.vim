@@ -68,6 +68,6 @@ if filereadable(expand("~/.vim/rcs/ts-vimrc.vim"))
 endif
 
 if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
+  " source ~/.vimrc.local
 endif
 
