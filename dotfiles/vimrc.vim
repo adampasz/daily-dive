@@ -71,13 +71,23 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " START PLUGINS BELOW
+" GLOBAL
 " Surround
 Plugin 'surround.vim'
 
 " Startify
 Plugin 'vim-startify'
-nmap <leader>s :tabnew<CR>Startify<CR>
+nmap <leader>s :tabnew<CR>:Startify<CR>
 
+" Buffergator
+Plugin 'jeetsukumaran/vim-buffergator'
+" Buggergator configuration
+" Use the right side of the screen
+let g:buffergator_viewport_split_policy = 'R'
+let g:buffergator_autoexpand_on_split = 0
+nmap <leader>, :BuffergatorToggle<CR>
+
+" LANG.-SPECIFIC PLUGINS
 " Typescript Syntax 
 Plugin 'leafgarland/typescript-vim'
 
@@ -98,4 +108,9 @@ endif
 
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+
+""""""""""""""""
+
+set guifont=Source_Code_Pro_Medium:h12 " Font family and font size.
 
