@@ -71,12 +71,8 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " START PLUGINS BELOW
-
-
-" END PLUGINS
-
-call vundle#end()            " required
-filetype plugin indent on    " required
+" Surround
+Plugin 'surround.vim'
 
 
 """""""""""""""
@@ -89,4 +85,11 @@ endif
 if filereadable(expand("~/.vimrc.local"))
   " source ~/.vimrc.local
 endif
+
+
+
+" END PLUGINS
+
+call vundle#end()            " required
+filetype plugin indent on    " required
 
