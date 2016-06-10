@@ -60,7 +60,26 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 
 command W w
 
+"""""""""""""""
+" PLUGINS
 """"""""""""""
+filetype off          "required by Vundle
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" START PLUGINS BELOW
+
+
+" END PLUGINS
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+"""""""""""""""
 " SOURCE OTHER RC FILES HERE 
 """"""""""""""
 if filereadable(expand("~/.vim/rcs/ts-vimrc.vim"))
