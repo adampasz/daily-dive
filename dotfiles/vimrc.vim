@@ -74,6 +74,9 @@ Plugin 'VundleVim/Vundle.vim'
 " Surround
 Plugin 'surround.vim'
 
+" Startify
+Plugin 'vim-startify'
+nmap <leader>s :tabnew<CR>:Startify<CR>
 
 """""""""""""""
 " SOURCE OTHER RC FILES HERE 
