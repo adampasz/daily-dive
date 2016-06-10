@@ -76,12 +76,15 @@ Plugin 'surround.vim'
 
 " Startify
 Plugin 'vim-startify'
-nmap <leader>s :tabnew<CR>:Startify<CR>
+nmap <leader>s :tabnew<CR>Startify<CR>
+
+" Typescript Syntax 
+Plugin 'leafgarland/typescript-vim'
 
 """""""""""""""
 " SOURCE OTHER RC FILES HERE 
 """"""""""""""
-if filereadable(expand("~/.vim/rcs/ts-vimrc.vim"))
+if filereadable(expand("~/.vim/rcs/js-vimrc.vim"))
   source ~/.vim/rcs/js-vimrc.vim
 endif
 
