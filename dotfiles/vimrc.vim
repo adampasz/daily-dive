@@ -23,17 +23,27 @@ set undodir=$HOME/.vim/undo " where to save undo histories
 set undolevels=1000         " How many undos
 set undoreload=10000        " number of lines to save for undo
 set hidden                  " Don't force save when changing buffers
+syntax on
 
 " cursor lines
 set cursorline
 set cursorcolumn
 set colorcolumn=120
 
-syntax on
-
 " make cursorlines brighter in insert mode
 autocmd InsertEnter * hi CursorLine ctermbg=17 guibg=#222232
-autocmd InsertLeave * hi CursorLine ctermbg=233 guibg=#111111
+autocmd InsertLeave,VimEnter * hi CursorLine ctermbg=233 guibg=#111111
+
+" Change cursor shape between insert and normal mode in iTerm2.app
+if $TERM_PROGRAM =~ "iTerm"
+    if exists('$TMUX')
+      let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+      let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+    else
+      let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+      let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    endif
+endif
 
 " support italics in terminal
 " http://stackoverflow.com/questions/3494435/vimrc-make-comments-italic
@@ -58,7 +68,7 @@ let mapleader = ","
 nmap <leader>V :source $MYVIMRC<CR>
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
-command W w
+command! W w
 
 """""""""""""""
 " PLUGINS
