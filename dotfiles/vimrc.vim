@@ -124,6 +124,14 @@ set guifont=Source_Code_Pro_Medium:h12 " Font family and font size.
 
 
 " see https://github.com/adampasz/stonewashed-themes
-colorscheme stonewashed-dark-256
-" colorscheme stonewashed-256
+function SetCustomColorScheme()
 
+  if has("gui_running")
+      colorscheme stonewashed-gui
+    else
+      set t_Co=256
+      colorscheme stonewashed-dark-256
+  endif
+
+endfunction
+call SetCustomColorScheme()
