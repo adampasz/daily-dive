@@ -124,14 +124,19 @@ set guifont=Source_Code_Pro_Medium:h12 " Font family and font size.
 
 
 " see https://github.com/adampasz/stonewashed-themes
-function SetCustomColorScheme()
-
-  if has("gui_running")
-      colorscheme stonewashed-gui
-    else
-      set t_Co=256
-      colorscheme stonewashed-dark-256
+function SetStonewashedTheme(background)
+  let themeName = 'stonewashed'
+  if a:background == "dark"
+    let themeName .= "-dark"
   endif
 
+  if has("gui_running")
+    let themeName .= "-gui"
+  else
+    set t_Co=256
+    let themeName .= "-256"
+  endif
+  execute "colorscheme " . themeName
+  
 endfunction
-call SetCustomColorScheme()
+call SetStonewashedTheme("dark")
