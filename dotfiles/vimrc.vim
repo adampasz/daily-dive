@@ -97,9 +97,6 @@ let g:buffergator_viewport_split_policy = 'R'
 let g:buffergator_autoexpand_on_split = 0
 nmap <leader>, :BuffergatorToggle<CR>
 
-" LANG.-SPECIFIC PLUGINS
-" Typescript Syntax 
-Plugin 'leafgarland/typescript-vim'
 
 """""""""""""""
 " SOURCE OTHER RC FILES HERE 
@@ -123,4 +120,10 @@ filetype plugin indent on    " required
 """"""""""""""""
 
 set guifont=Source_Code_Pro_Medium:h12 " Font family and font size.
+
+
+
+" see https://github.com/adampasz/stonewashed-themes
+colorscheme stonewashed-dark-256
+" colorscheme stonewashed-256
 
