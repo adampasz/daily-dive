@@ -118,6 +118,8 @@ filetype plugin indent on    " required
 
 
 """"""""""""""""
+" EXPERIMENTAL
+""""""""""""""""
 
 set guifont=Source_Code_Pro_Medium:h12 " Font family and font size.
 
