@@ -32,7 +32,7 @@ set colorcolumn=120
 
 " make cursorlines brighter in insert mode
 autocmd InsertEnter * hi CursorLine ctermbg=17 guibg=#222232
-autocmd InsertLeave,VimEnter * hi CursorLine ctermbg=233 guibg=#111111
+autocmd InsertLeave,BufRead,VimEnter * hi CursorLine ctermbg=233 guibg=#111111
 
 " Change cursor shape between insert and normal mode in iTerm2.app
 if $TERM_PROGRAM =~ "iTerm"
@@ -96,6 +96,8 @@ Plugin 'jeetsukumaran/vim-buffergator'
 let g:buffergator_viewport_split_policy = 'R'
 let g:buffergator_autoexpand_on_split = 0
 nmap <leader>, :BuffergatorToggle<CR>
+nmap <leader>1 :call SetStonewashedTheme('dark')<CR>
+nmap <leader>2 :call SetStonewashedTheme('light')<CR>
 
 
 """""""""""""""
