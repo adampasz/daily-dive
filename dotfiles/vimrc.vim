@@ -103,11 +103,11 @@ nmap <leader>2 :call SetStonewashedTheme('light')<CR>
 """""""""""""""
 " SOURCE OTHER RC FILES HERE 
 """"""""""""""
-if filereadable(expand("~/.vim/rcs/js-vimrc.vim"))
+if filereadable(expand('~/.vim/rcs/js-vimrc.vim'))
   source ~/.vim/rcs/js-vimrc.vim
 endif
 
-if filereadable(expand("~/.vimrc.local"))
+if filereadable(expand('~/.vimrc.local'))
   " source ~/.vimrc.local
 endif
 
