@@ -25,5 +25,4 @@ export class Sprite {
     this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, vertices.length / 3);
   }
 
-
 }
