@@ -3,6 +3,7 @@ import { Http, Response } from '@angular/http';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 // import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -12,11 +13,10 @@ export class LoadShaderService {
   }
 
   getShader(url: string): Observable<string> {
-    return this.http.get(url).map(this.extractData);
+    return this.http.get(url).map(this.extractData).catch(this.handleError);
   }
 
   private extractData(res: Response) {
-    console.log('extract data');
     return res.text();
   }
 
