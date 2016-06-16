@@ -13,7 +13,7 @@ import {IShaderProps} from './gl/shader';
   providers: [LoadShaderService],
 })
 export class GLComponent implements OnInit {
-  
+
   constructor( private loadShaderService: LoadShaderService) {
   }
   public static SQUARE = [
@@ -59,7 +59,6 @@ export class GLComponent implements OnInit {
   ngOnInit() {
     let vertices = GLComponent.SQUARE;
     this.engine.initGL('canvas');
-    this.engine.clearCanvas();
     let props = {
       // vertexShaderID: 'vs-2',
       // fragmentShaderID: 'fs-white',
@@ -67,10 +66,13 @@ export class GLComponent implements OnInit {
       fragmentShaderPath: '/app/gl/sl/fs-color.glsl',
     };
     let buffer = this.engine.createVertexBuffer(vertices);
-    let shader = this.engine.createShader(props, this.loadShaderService);
-    // let r1 = this.engine.createRenderable(buffer, shader);
-    // r1.draw(GLComponent.RED, vertices);
-    let r2 = this.engine.createSprite(buffer, shader);
-    r2.draw(GLComponent.BLACK, GLComponent.TRIANGLES, GLComponent.TRI_COLORS);
+    let shader = this.engine.createShader(() => {
+      this.engine.clearCanvas();
+      // let r1 = this.engine.createRenderable(buffer, shader);
+      // r1.draw(GLComponent.RED, vertices);
+      let r2 = this.engine.createSprite(buffer, shader);
+      r2.draw(GLComponent.BLACK, GLComponent.TRIANGLES, GLComponent.TRI_COLORS);
+
+    }, props, this.loadShaderService);
   }
 }

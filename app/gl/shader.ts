@@ -1,21 +1,20 @@
 import {WebGLRenderingContext} from './specs/web-gl-rendering-context-base';
+import { Observable }     from 'rxjs/Observable';
 import {LoadShaderService} from './load-shader.service';
 
 export class Shader {
   simpleShader: WebGLShader = null;
   gl: WebGLRenderingContext = null;
-  constructor( private loadShaderService: LoadShaderService) {
+  constructor(private loadShaderService: LoadShaderService) {
   }
   loadShaderByID(id: string): string {
     let shaderText = document.getElementById(id);
     return shaderText.firstChild.textContent;
   }
-  loadShaderByPath(path: string): string {
-    this.loadShaderService.getShader(path).subscribe(
-      function(payload:string) {
-      }
-    );
-
+  loadShaderByPath(path: string): Observable<string> {
+    return this.loadShaderService.getShader(path);
+  }
+  loadShaderByPath_Old(path: string): string{
     let request: XMLHttpRequest = new XMLHttpRequest();
     request.open('GET', path, false);
     try {
@@ -43,13 +42,25 @@ export class Shader {
     return compiledShader;
   }
 
-  init(gl: WebGLRenderingContext, props: IShaderProps) {
+  init(callback: any, gl: WebGLRenderingContext, props: IShaderProps) {
     this.gl = gl;
+    var obj = this;
     //let vertexShaderSource = this.loadShaderByID(props.vertexShaderID);
-    let vertexShaderSource = this.loadShaderByPath(props.vertexShaderPath);
-    //let fragmentShaderSource = this.loadShaderByID(props.fragmentShaderID);
-    let fragmentShaderSource = this.loadShaderByPath(props.fragmentShaderPath);
+    this.loadShaderByPath(props.vertexShaderPath)
+    .subscribe(function(payload){
+      console.log(payload)
 
+      obj.loadShaderByPath(props.fragmentShaderPath).subscribe(function(p2:any) {
+        console.log(p2);
+        obj.finishInit(payload, p2);
+        callback();
+      });
+
+    });
+    //let fragmentShaderSource = this.loadShaderByID(props.fragmentShaderID);
+  }
+
+  private finishInit(vertexShaderSource:string, fragmentShaderSource:string) {
     var vertexShader = this.compileShader(vertexShaderSource, this.gl.VERTEX_SHADER);
     var fragmentShader = this.compileShader(fragmentShaderSource, this.gl.FRAGMENT_SHADER);
     this.simpleShader = this.gl.createProgram();

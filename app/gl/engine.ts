@@ -32,10 +32,10 @@ export class Engine {
     return ren;
   }
 
-  createShader(props:IShaderProps, loadShaderService:any):Shader {
+  createShader(callback: any, props:IShaderProps, loadShaderService:any):Shader {
     let shader = new Shader(loadShaderService);
 
-    shader.init(this.gl, props);
+    shader.init(callback, this.gl, props);
     return shader;
   }
 
