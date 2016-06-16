@@ -11,24 +11,8 @@ export class Shader {
     let shaderText = document.getElementById(id);
     return shaderText.firstChild.textContent;
   }
-  loadShaderByPath(path: string): Observable<string> {
+  loadShaderByPathAsync(path: string): Observable<string> {
     return this.loadShaderService.getShader(path);
-  }
-  loadShaderByPath_Old(path: string): string{
-    let request: XMLHttpRequest = new XMLHttpRequest();
-    request.open('GET', path, false);
-    try {
-      request.send();
-    } catch (e) {
-      console.error('failed to load shader:', path);
-      return null;
-    }
-    let source: string = request.responseText;
-    if (source === null) {
-      console.error('failed to load:', path);
-      return null;
-    }
-    return source;
   }
 
   compileShader(source: string, shaderType: number): WebGLShader {
@@ -44,20 +28,14 @@ export class Shader {
 
   init(callback: any, gl: WebGLRenderingContext, props: IShaderProps) {
     this.gl = gl;
-    var obj = this;
-    //let vertexShaderSource = this.loadShaderByID(props.vertexShaderID);
-    this.loadShaderByPath(props.vertexShaderPath)
-    .subscribe(function(payload){
-      console.log(payload)
-
-      obj.loadShaderByPath(props.fragmentShaderPath).subscribe(function(p2:any) {
-        console.log(p2);
-        obj.finishInit(payload, p2);
+    this.loadShaderByPathAsync(props.vertexShaderPath)
+    .subscribe(vertexShaderSource => {
+      this.loadShaderByPathAsync(props.fragmentShaderPath)
+      .subscribe(fragmentShaderSource => {
+        this.finishInit(vertexShaderSource, fragmentShaderSource);
         callback();
       });
-
     });
-    //let fragmentShaderSource = this.loadShaderByID(props.fragmentShaderID);
   }
 
   private finishInit(vertexShaderSource:string, fragmentShaderSource:string) {
