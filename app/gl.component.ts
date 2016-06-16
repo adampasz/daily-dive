@@ -6,8 +6,8 @@ import {IShaderProps} from './gl/shader';
   selector: 'gl',
   template: `
   <h4>some cool web gl</h4>
-    <canvas id="canvas" width="400" height="300"></canvas>
-    `,
+  <canvas id="canvas" width="400" height="300"></canvas>
+  `,
 })
 export class GLComponent implements OnInit {
   public static SQUARE = [
@@ -35,7 +35,7 @@ export class GLComponent implements OnInit {
   public static TRIANGLES = [
     //left
     -0.5, 0.5, 0.0,
-    0.0, 0.0, 0.0, 
+    0.0, 0.0, 0.0,
     -0.5, -0.5, 0.0,
     //right
     0.5, 0.5, 0.0,
@@ -57,7 +57,7 @@ export class GLComponent implements OnInit {
     let props = {
       // vertexShaderID: 'vs-2',
       // fragmentShaderID: 'fs-white',
-     vertexShaderPath: '/app/gl/sl/vs-simple.glsl',
+      vertexShaderPath: '/app/gl/sl/vs-simple.glsl',
       fragmentShaderPath: '/app/gl/sl/fs-color.glsl',
     };
     let buffer = this.engine.createVertexBuffer(vertices);

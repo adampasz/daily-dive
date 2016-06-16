@@ -95,6 +95,7 @@ let g:buffergator_autoexpand_on_split = 0
 nmap <leader>, :BuffergatorToggle<CR>
 nmap <leader>1 :call SetStonewashedTheme('dark')<CR>
 nmap <leader>2 :call SetStonewashedTheme('light')<CR>
+nmap <leader>f :Autoformat<CR>
 
 set guifont=Source_Code_Pro_Medium:h12 " Font family and font size.
 """""""""""""""
