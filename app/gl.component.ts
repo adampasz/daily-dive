@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Engine} from './gl/engine';
+import {LoadShaderService} from './gl/load-shader.service';
+import { HTTP_PROVIDERS } from '@angular/http';
 import {IShaderProps} from './gl/shader';
 
 @Component({
@@ -8,8 +10,12 @@ import {IShaderProps} from './gl/shader';
   <h4>some cool web gl</h4>
   <canvas id="canvas" width="400" height="300"></canvas>
   `,
+  providers: [LoadShaderService],
 })
 export class GLComponent implements OnInit {
+  
+  constructor( private loadShaderService: LoadShaderService) {
+  }
   public static SQUARE = [
     0.5, 0.5, 0.0,
     -0.5, 0.5, 0.0,
@@ -61,7 +67,7 @@ export class GLComponent implements OnInit {
       fragmentShaderPath: '/app/gl/sl/fs-color.glsl',
     };
     let buffer = this.engine.createVertexBuffer(vertices);
-    let shader = this.engine.createShader(props);
+    let shader = this.engine.createShader(props, this.loadShaderService);
     // let r1 = this.engine.createRenderable(buffer, shader);
     // r1.draw(GLComponent.RED, vertices);
     let r2 = this.engine.createSprite(buffer, shader);
