@@ -126,6 +126,11 @@ function! SetStonewashedTheme(background)
   let themeName = 'stonewashed'
   if a:background == "dark"
     let themeName .= "-dark"
+    autocmd InsertEnter * hi CursorLine ctermbg=17 guibg=#222232 cterm=none gui=none
+    autocmd InsertLeave,BufRead,VimEnter * hi CursorLine ctermbg=236 guibg=#111111
+  else
+    autocmd InsertEnter * hi CursorLine ctermbg=230 guibg= #ffffdf cterm=none gui=none
+    autocmd InsertLeave,BufRead,VimEnter * hi CursorLine ctermbg=231 guibg=#ffffff
   endif
 
   if has("gui_running")
@@ -136,8 +141,6 @@ function! SetStonewashedTheme(background)
   endif
   execute "colorscheme " . themeName
 " make cursorlines brighter in insert mode
-  autocmd InsertEnter * hi CursorLine ctermbg=17 guibg=#222232 cterm=none gui=none
-  autocmd InsertLeave,BufRead,VimEnter * hi CursorLine ctermbg=233 guibg=#111111
   
 endfunction
 call SetStonewashedTheme("dark")
