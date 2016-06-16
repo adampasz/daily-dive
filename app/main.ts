@@ -6,10 +6,11 @@ import { bootstrap } from '@angular/platform-browser-dynamic';
 //import { InMemoryDataService } from './in-memory-data.service';
 // import { AppComponent } from './app.component';
 import { GLComponent } from './gl.component';
+import {LoadShaderService} from './gl/load-shader.service';
 // import {enableProdMode} from '@angular/core';
 
 // enableProdMode();
-  bootstrap (GLComponent);
+  bootstrap (GLComponent, [LoadShaderService]);
 
 
 

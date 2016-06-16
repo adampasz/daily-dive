@@ -1,17 +1,22 @@
 import {WebGLRenderingContext} from './specs/web-gl-rendering-context-base';
+import {LoadShaderService} from './load-shader.service';
 
 export class Shader {
   simpleShader: WebGLShader = null;
-  gl:WebGLRenderingContext = null;
-  constructor(gl:WebGLRenderingContext) {
-    this.gl = gl;
+  gl: WebGLRenderingContext = null;
+  constructor( private loadShaderService: LoadShaderService) {
   }
   loadShaderByID(id: string): string {
     let shaderText = document.getElementById(id);
     return shaderText.firstChild.textContent;
   }
   loadShaderByPath(path: string): string {
-    let request:XMLHttpRequest = new XMLHttpRequest();
+    this.loadShaderService.getShader(path).subscribe(
+      function() {
+      }
+    );
+
+    let request: XMLHttpRequest = new XMLHttpRequest();
     request.open('GET', path, false);
     try {
       request.send();
@@ -19,7 +24,7 @@ export class Shader {
       console.error('failed to load shader:', path);
       return null;
     }
-    let source:string = request.responseText;
+    let source: string = request.responseText;
     if (source === null) {
       console.error('failed to load:', path);
       return null;
@@ -27,7 +32,7 @@ export class Shader {
     return source;
   }
 
-  compileShader(source:string, shaderType: number): WebGLShader {
+  compileShader(source: string, shaderType: number): WebGLShader {
     let compiledShader = this.gl.createShader(shaderType);
     this.gl.shaderSource(compiledShader, source);
     this.gl.compileShader(compiledShader);
@@ -38,7 +43,8 @@ export class Shader {
     return compiledShader;
   }
 
-  init(props: IShaderProps) {
+  init(gl: WebGLRenderingContext, props: IShaderProps) {
+    this.gl = gl;
     //let vertexShaderSource = this.loadShaderByID(props.vertexShaderID);
     let vertexShaderSource = this.loadShaderByPath(props.vertexShaderPath);
     //let fragmentShaderSource = this.loadShaderByID(props.fragmentShaderID);
@@ -55,7 +61,7 @@ export class Shader {
     }
     this.gl.useProgram(this.simpleShader);
   }
-  
+
   activate(props: IActivationProps) {
     let attributePosition = this.gl.getAttribLocation(this.simpleShader, props.customAttributeName);
     this.gl.enableVertexAttribArray(attributePosition);
@@ -73,7 +79,7 @@ export interface IActivationProps {
   uniformTransform?: any
 }
 
-export interface IShaderProps{
+export interface IShaderProps {
   vertexShaderID?: string;
   fragmentShaderID?: string;
   vertexShaderPath?: string;
