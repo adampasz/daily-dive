@@ -30,9 +30,6 @@ set cursorline
 set cursorcolumn
 set colorcolumn=120
 
-" make cursorlines brighter in insert mode
-autocmd InsertEnter * hi CursorLine ctermbg=17 guibg=#222232
-autocmd InsertLeave,BufRead,VimEnter * hi CursorLine ctermbg=233 guibg=#111111
 
 " Change cursor shape between insert and normal mode in iTerm2.app
 if $TERM_PROGRAM =~ "iTerm"
@@ -99,7 +96,7 @@ nmap <leader>, :BuffergatorToggle<CR>
 nmap <leader>1 :call SetStonewashedTheme('dark')<CR>
 nmap <leader>2 :call SetStonewashedTheme('light')<CR>
 
-
+set guifont=Source_Code_Pro_Medium:h12 " Font family and font size.
 """""""""""""""
 " SOURCE OTHER RC FILES HERE 
 """"""""""""""
@@ -123,9 +120,6 @@ filetype plugin indent on    " required
 " EXPERIMENTAL
 """"""""""""""""
 
-set guifont=Source_Code_Pro_Medium:h12 " Font family and font size.
-
-
 
 " see https://github.com/adampasz/stonewashed-themes
 function! SetStonewashedTheme(background)
@@ -141,6 +135,9 @@ function! SetStonewashedTheme(background)
     let themeName .= "-256"
   endif
   execute "colorscheme " . themeName
+" make cursorlines brighter in insert mode
+  autocmd InsertEnter * hi CursorLine ctermbg=17 guibg=#222232 cterm=none gui=none
+  autocmd InsertLeave,BufRead,VimEnter * hi CursorLine ctermbg=233 guibg=#111111
   
 endfunction
 call SetStonewashedTheme("dark")
