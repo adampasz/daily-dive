@@ -11,14 +11,13 @@ export class LoadShaderService {
 
   }
 
-  getShader(url: string): Observable<Response> {
+  getShader(url: string): Observable<string> {
     return this.http.get(url).map(this.extractData);
   }
 
   private extractData(res: Response) {
     console.log('extract data');
-    debugger;
-    return res;
+    return res.text();
   }
 
   private handleError(error: any) {

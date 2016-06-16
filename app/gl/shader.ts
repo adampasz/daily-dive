@@ -12,7 +12,8 @@ export class Shader {
   }
   loadShaderByPath(path: string): string {
     this.loadShaderService.getShader(path).subscribe(
-      function() {
+      function(payload:string) {
+        debugger;
       }
     );
 
