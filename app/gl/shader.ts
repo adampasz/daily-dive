@@ -1,6 +1,6 @@
 import {WebGLRenderingContext} from './specs/web-gl-rendering-context-base';
 import { Observable }     from 'rxjs/Observable';
-import {LoadShaderAsync} from './load-shader-async.service';
+import {LoadShaderAsync} from './services/load-shader-async';
 
 export class Shader {
   simpleShader: WebGLShader = null;

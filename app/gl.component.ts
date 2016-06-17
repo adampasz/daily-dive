@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Engine} from './gl/engine';
-import {LoadShaderAsync} from './gl/load-shader.service';
+import {LoadShaderAsync} from './gl/services/load-shader-async';
 import { HTTP_PROVIDERS } from '@angular/http';
 import {IShaderProps} from './gl/shader';
 
