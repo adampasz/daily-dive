@@ -6,11 +6,11 @@ import { provide } from '@angular/core';
 //import { InMemoryDataService } from './in-memory-data.service';
 // import { AppComponent } from './app.component';
 import { GLComponent } from './gl.component';
-import {LoadShaderService} from './gl/load-shader.service';
+import {LoadShaderAsync} from './gl/load-shader-async.service';
 // import {enableProdMode} from '@angular/core';
 
 // enableProdMode();
-  bootstrap (GLComponent, [HTTP_PROVIDERS, LoadShaderService]);
+  bootstrap (GLComponent, [HTTP_PROVIDERS, LoadShaderAsync]);
 
 
 

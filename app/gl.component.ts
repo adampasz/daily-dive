@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Engine} from './gl/engine';
-import {LoadShaderService} from './gl/load-shader.service';
+import {LoadShaderAsync} from './gl/load-shader.service';
 import { HTTP_PROVIDERS } from '@angular/http';
 import {IShaderProps} from './gl/shader';
 
@@ -10,11 +10,11 @@ import {IShaderProps} from './gl/shader';
   <h4>some cool web gl</h4>
   <canvas id="canvas" width="400" height="300"></canvas>
   `,
-  providers: [LoadShaderService],
+  providers: [LoadShaderAsync],
 })
 export class GLComponent implements OnInit {
 
-  constructor( private loadShaderService: LoadShaderService) {
+  constructor( private loadShaderService: LoadShaderAsync) {
   }
   public static SQUARE = [
     0.5, 0.5, 0.0,

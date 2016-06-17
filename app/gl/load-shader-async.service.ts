@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 // import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class LoadShaderService {
+export class LoadShaderAsync {
   constructor(private http: Http) {
 
   }

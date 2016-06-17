@@ -1,11 +1,11 @@
 import {WebGLRenderingContext} from './specs/web-gl-rendering-context-base';
 import { Observable }     from 'rxjs/Observable';
-import {LoadShaderService} from './load-shader.service';
+import {LoadShaderAsync} from './load-shader-async.service';
 
 export class Shader {
   simpleShader: WebGLShader = null;
   gl: WebGLRenderingContext = null;
-  constructor(private loadShaderService: LoadShaderService) {
+  constructor(private loadShaderService: LoadShaderAsync) {
   }
   loadShaderByID(id: string): string {
     let shaderText = document.getElementById(id);
