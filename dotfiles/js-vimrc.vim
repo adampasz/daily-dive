@@ -10,7 +10,7 @@ nmap <leader>W :set wildignore=*.js,*.map<CR>
 " Typescript Syntax 
 Plugin 'leafgarland/typescript-vim'
 
-" Typescript Completion
+" Typescript Compilation
 Plugin 'Shougo/vimproc.vim' " Need to run `make` manually
 
 Plugin 'Chiel92/vim-autoformat'
@@ -22,3 +22,7 @@ let g:tsuquyomi_completion_detail = 1
 " Type <C-^> in normal mode or visual mode, Tsuquyomi shows a list of location where the symbol under the cursor is referenced.
 
 "ignore .js and .map files in edit file path
+
+" Typescript auto-complete
+Plugin 'Valloric/YouCompleteMe'
+
