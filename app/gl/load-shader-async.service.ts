@@ -1,6 +1,5 @@
 import { Injectable }     from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { HTTP_PROVIDERS } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -13,11 +12,13 @@ export class LoadShaderAsync {
   }
 
   getShader(url: string): Observable<string> {
-    return this.http.get(url).map(this.extractData).catch(this.handleError);
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
-  private extractData(res: Response) {
-    return res.text();
+  private extractData(response: Response) {
+    return response.text();
   }
 
   private handleError(error: any) {
