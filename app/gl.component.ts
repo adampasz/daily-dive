@@ -14,7 +14,7 @@ import {IShaderProps} from './gl/shader';
 })
 export class GLComponent implements OnInit {
 
-  constructor( private loadShaderService: LoadShaderAsync) {
+  constructor(private loadShaderService: LoadShaderAsync) {
   }
   public static SQUARE = [
     0.5, 0.5, 0.0,
@@ -66,13 +66,18 @@ export class GLComponent implements OnInit {
       fragmentShaderPath: '/app/gl/sl/fs-color.glsl',
     };
     let buffer = this.engine.createVertexBuffer(vertices);
-    let shader = this.engine.createShader(() => {
-      this.engine.clearCanvas();
-      // let r1 = this.engine.createRenderable(buffer, shader);
-      // r1.draw(GLComponent.RED, vertices);
-      let r2 = this.engine.createSprite(buffer, shader);
-      r2.draw(GLComponent.BLACK, GLComponent.TRIANGLES, GLComponent.TRI_COLORS);
+    let shader = this.engine.createShader(props, this.loadShaderService);
 
-    }, props, this.loadShaderService);
+    shader.init().subscribe(
+      {
+        error: null,
+        complete: () => {
+          this.engine.clearCanvas();
+          // let r1 = this.engine.createRenderable(buffer, shader);
+          // r1.draw(GLComponent.RED, vertices);
+          let r2 = this.engine.createSprite(buffer, shader);
+          r2.draw(GLComponent.BLACK, GLComponent.TRIANGLES, GLComponent.TRI_COLORS);
+        }
+      });
   }
 }

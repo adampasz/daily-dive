@@ -6,7 +6,6 @@ import {LoadShaderAsync} from './services/load-shader-async';
 export class Shader {
   simpleShader: WebGLShader = null;
   constructor(private loadShaderService: LoadShaderAsync, private gl: WebGLRenderingContext, public props: IShaderProps) {
-    console.log(this.props);
   }
   loadShaderByID(id: string): string {
     let shaderText = document.getElementById(id);
@@ -29,18 +28,18 @@ export class Shader {
 
   init() {
     return Observable.create((observer: Observer<any>) => {
-    this.loadShaderByPathAsync(this.props.vertexShaderPath)
-      .subscribe(vertexShaderSource => {
-      this.loadShaderByPathAsync(this.props.fragmentShaderPath)
-      .subscribe(fragmentShaderSource => {
-        this.finishInit(vertexShaderSource, fragmentShaderSource);
-        observer.complete();
-      });
-    });
+      this.loadShaderByPathAsync(this.props.vertexShaderPath)
+        .subscribe(vertexShaderSource => {
+          this.loadShaderByPathAsync(this.props.fragmentShaderPath)
+            .subscribe(fragmentShaderSource => {
+              this.finishInit(vertexShaderSource, fragmentShaderSource);
+              observer.complete();
+            });
+        });
     })
   }
 
-  private finishInit(vertexShaderSource:string, fragmentShaderSource:string) {
+  private finishInit(vertexShaderSource: string, fragmentShaderSource: string) {
     var vertexShader = this.compileShader(vertexShaderSource, this.gl.VERTEX_SHADER);
     var fragmentShader = this.compileShader(fragmentShaderSource, this.gl.FRAGMENT_SHADER);
     this.simpleShader = this.gl.createProgram();

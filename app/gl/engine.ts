@@ -37,14 +37,8 @@ export class Engine {
     return ren;
   }
 
-  createShader(callback: () => void, props:IShaderProps, loadShaderService:any):Shader {
-    let shader = new Shader(loadShaderService, this.gl, props);
-    shader.init().subscribe(
-      {
-       error: null,
-       complete: callback
-      }); 
-    return shader;
+  createShader(props:IShaderProps, loadShaderService:any):Shader {
+    return new Shader(loadShaderService, this.gl, props);
   }
 
   createVertexBuffer(vertices:number[]): VertexBuffer
