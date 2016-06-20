@@ -1,11 +1,12 @@
 import {WebGLRenderingContext} from './specs/web-gl-rendering-context-base';
 import { Observable }     from 'rxjs/Observable';
+import {Observer} from 'rxjs/Observer';
 import {LoadShaderAsync} from './services/load-shader-async';
 
 export class Shader {
   simpleShader: WebGLShader = null;
-  gl: WebGLRenderingContext = null;
-  constructor(private loadShaderService: LoadShaderAsync) {
+  constructor(private loadShaderService: LoadShaderAsync, private gl: WebGLRenderingContext, public props: IShaderProps) {
+    console.log(this.props);
   }
   loadShaderByID(id: string): string {
     let shaderText = document.getElementById(id);
@@ -26,16 +27,17 @@ export class Shader {
     return compiledShader;
   }
 
-  init(callback: any, gl: WebGLRenderingContext, props: IShaderProps) {
-    this.gl = gl;
-    this.loadShaderByPathAsync(props.vertexShaderPath)
-    .subscribe(vertexShaderSource => {
-      this.loadShaderByPathAsync(props.fragmentShaderPath)
+  init() {
+    return Observable.create((observer: Observer<any>) => {
+    this.loadShaderByPathAsync(this.props.vertexShaderPath)
+      .subscribe(vertexShaderSource => {
+      this.loadShaderByPathAsync(this.props.fragmentShaderPath)
       .subscribe(fragmentShaderSource => {
         this.finishInit(vertexShaderSource, fragmentShaderSource);
-        callback();
+        observer.complete();
       });
     });
+    })
   }
 
   private finishInit(vertexShaderSource:string, fragmentShaderSource:string) {

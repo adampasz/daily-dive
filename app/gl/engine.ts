@@ -4,6 +4,11 @@ import {VertexBuffer} from './vertex-buffer';
 import {Shader, IShaderProps} from './shader';
 import {Sprite} from './sprite';
 
+
+import { Observable }     from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
 export class Engine {
   gl: WebGLRenderingContext = null;
 
@@ -33,9 +38,12 @@ export class Engine {
   }
 
   createShader(callback: () => void, props:IShaderProps, loadShaderService:any):Shader {
-    let shader = new Shader(loadShaderService);
-
-    shader.init(callback, this.gl, props);
+    let shader = new Shader(loadShaderService, this.gl, props);
+    shader.init().subscribe(
+      {
+       error: null,
+       complete: callback
+      }); 
     return shader;
   }
 
