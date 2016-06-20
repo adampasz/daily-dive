@@ -30,7 +30,6 @@ export class Shader {
     return Observable.create((observer: Observer<any>) => {
       this.loadShaderByPathAsync(this.props.vertexShaderPath)
         .subscribe(
-          
           vertexShaderSource => {
           observer.next('loaded ' + this.props.vertexShaderPath);
           this.loadShaderByPathAsync(this.props.fragmentShaderPath)

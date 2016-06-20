@@ -62,7 +62,7 @@ export class GLComponent implements OnInit {
     let props = {
       // vertexShaderID: 'vs-2',
       // fragmentShaderID: 'fs-white',
-      vertexShaderPath: '/app/gl/sl/vs-simple1.glsl',
+      vertexShaderPath: '/app/gl/sl/vs-simple.glsl',
       fragmentShaderPath: '/app/gl/sl/fs-color.glsl',
     };
     let buffer = this.engine.createVertexBuffer(vertices);
