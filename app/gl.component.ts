@@ -62,7 +62,7 @@ export class GLComponent implements OnInit {
     let props = {
       // vertexShaderID: 'vs-2',
       // fragmentShaderID: 'fs-white',
-      vertexShaderPath: '/app/gl/sl/vs-simple.glsl',
+      vertexShaderPath: '/app/gl/sl/vs-simple1.glsl',
       fragmentShaderPath: '/app/gl/sl/fs-color.glsl',
     };
     let buffer = this.engine.createVertexBuffer(vertices);
@@ -70,7 +70,8 @@ export class GLComponent implements OnInit {
 
     shader.init().subscribe(
       {
-        error: null,
+        next: (x:any) => console.log('observer got next value:', x),
+        error: (err:any) => console.error('observer got error:', err),
         complete: () => {
           this.engine.clearCanvas();
           // let r1 = this.engine.createRenderable(buffer, shader);

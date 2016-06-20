@@ -29,13 +29,18 @@ export class Shader {
   init() {
     return Observable.create((observer: Observer<any>) => {
       this.loadShaderByPathAsync(this.props.vertexShaderPath)
-        .subscribe(vertexShaderSource => {
+        .subscribe(
+          
+          vertexShaderSource => {
+          observer.next('loaded ' + this.props.vertexShaderPath);
           this.loadShaderByPathAsync(this.props.fragmentShaderPath)
             .subscribe(fragmentShaderSource => {
+              observer.next('loaded ' + this.props.fragmentShaderPath);
               this.finishInit(vertexShaderSource, fragmentShaderSource);
               observer.complete();
             });
-        });
+        }
+        );
     })
   }
 
