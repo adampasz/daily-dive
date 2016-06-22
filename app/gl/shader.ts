@@ -8,17 +8,7 @@ export class Shader {
   constructor(private loadShaderService: LoadShaderAsync, private gl: WebGLRenderingContext, public props: IShaderProps) {
   }
 
-  compileShader(source: string, shaderType: number): WebGLShader {
-    let compiledShader = this.gl.createShader(shaderType);
-    this.gl.shaderSource(compiledShader, source);
-    this.gl.compileShader(compiledShader);
-
-    if (!this.gl.getShaderParameter(compiledShader, this.gl.COMPILE_STATUS)) {
-      console.error('shader compile error: ', this.gl.getShaderInfoLog(compiledShader));
-    }
-    return compiledShader;
-  }
-
+  // asynchronously loads vertex and fragment shader; links them to the GL conext
   init() {
     return Observable.create((observer: Observer<any>) => {
       this.loadShaderService.getShader(this.props.vertexShaderPath)
@@ -31,8 +21,7 @@ export class Shader {
               this.finishInit(vertexShaderSource, fragmentShaderSource);
               observer.complete();
             });
-        }
-        );
+        });
     })
   }
 
@@ -44,11 +33,24 @@ export class Shader {
     this.gl.attachShader(this.simpleShader, fragmentShader);
     this.gl.linkProgram(this.simpleShader);
     if (!this.gl.getProgramParameter(this.simpleShader, this.gl.LINK_STATUS)) {
+      //TODO: Should throw error to observer?
       console.error('unable to link shader');
     }
     this.gl.useProgram(this.simpleShader);
   }
 
+  private compileShader(source: string, shaderType: number): WebGLShader {
+    let compiledShader = this.gl.createShader(shaderType);
+    this.gl.shaderSource(compiledShader, source);
+    this.gl.compileShader(compiledShader);
+
+    if (!this.gl.getShaderParameter(compiledShader, this.gl.COMPILE_STATUS)) {
+      console.error('shader compile error: ', this.gl.getShaderInfoLog(compiledShader));
+    }
+    return compiledShader;
+  }
+
+  // prepares shader for rendering
   activate(props: IActivationProps) {
     let attributePosition = this.gl.getAttribLocation(this.simpleShader, props.customAttributeName);
     this.gl.enableVertexAttribArray(attributePosition);
@@ -57,6 +59,10 @@ export class Shader {
       let uPixelColorLocation = this.gl.getUniformLocation(this.simpleShader, 'uPixelColor');
       this.gl.uniform4fv(uPixelColorLocation, props.uniformPixelColor);
     }
+  }
+
+  destroy() {
+    
   }
 }
 
