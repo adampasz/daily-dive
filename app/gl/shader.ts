@@ -4,7 +4,9 @@ import {Observer} from 'rxjs/Observer';
 import {LoadShaderAsync} from './services/load-shader-async';
 
 export class Shader {
-  simpleShader: WebGLShader = null;
+  private program: WebGLProgram = null;
+  private vertexShader: WebGLShader = null;
+  private fragmentShader: WebGLShader = null;
   constructor(private loadShaderService: LoadShaderAsync, private gl: WebGLRenderingContext, public props: IShaderProps) {
   }
 
@@ -26,17 +28,17 @@ export class Shader {
   }
 
   private finishInit(vertexShaderSource: string, fragmentShaderSource: string) {
-    var vertexShader = this.compileShader(vertexShaderSource, this.gl.VERTEX_SHADER);
-    var fragmentShader = this.compileShader(fragmentShaderSource, this.gl.FRAGMENT_SHADER);
-    this.simpleShader = this.gl.createProgram();
-    this.gl.attachShader(this.simpleShader, vertexShader);
-    this.gl.attachShader(this.simpleShader, fragmentShader);
-    this.gl.linkProgram(this.simpleShader);
-    if (!this.gl.getProgramParameter(this.simpleShader, this.gl.LINK_STATUS)) {
+    this.vertexShader = this.compileShader(vertexShaderSource, this.gl.VERTEX_SHADER);
+    this.fragmentShader = this.compileShader(fragmentShaderSource, this.gl.FRAGMENT_SHADER);
+    this.program = this.gl.createProgram();
+    this.gl.attachShader(this.program, this.vertexShader);
+    this.gl.attachShader(this.program, this.fragmentShader);
+    this.gl.linkProgram(this.program);
+    if (!this.gl.getProgramParameter(this.program, this.gl.LINK_STATUS)) {
       //TODO: Should throw error to observer?
       console.error('unable to link shader');
     }
-    this.gl.useProgram(this.simpleShader);
+    this.gl.useProgram(this.program);
   }
 
   private compileShader(source: string, shaderType: number): WebGLShader {
@@ -52,17 +54,21 @@ export class Shader {
 
   // prepares shader for rendering
   activate(props: IActivationProps) {
-    let attributePosition = this.gl.getAttribLocation(this.simpleShader, props.customAttributeName);
+    let attributePosition = this.gl.getAttribLocation(this.program, props.customAttributeName);
     this.gl.enableVertexAttribArray(attributePosition);
     this.gl.vertexAttribPointer(attributePosition, 3, this.gl.FLOAT, false, 0, 0);
     if (props.hasOwnProperty('uniformPixelColor')) {
-      let uPixelColorLocation = this.gl.getUniformLocation(this.simpleShader, 'uPixelColor');
+      let uPixelColorLocation = this.gl.getUniformLocation(this.program, 'uPixelColor');
       this.gl.uniform4fv(uPixelColorLocation, props.uniformPixelColor);
     }
   }
 
   destroy() {
-    
+   this.gl.detachShader(this.program, this.vertexShader); 
+   this.gl.detachShader(this.program, this.fragmentShader); 
+   this.gl.deleteShader(this.vertexShader);
+   this.gl.deleteShader(this.fragmentShader);
+   this.gl.deleteProgram(this.program);
   }
 }
 
