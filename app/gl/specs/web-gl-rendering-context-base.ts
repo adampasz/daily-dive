@@ -437,6 +437,12 @@ export interface WebGLRenderingContext {
   createShader(type: GLenum): WebGLShader;
   createTexture(): WebGLTexture;
   deleteBuffer(buffer: WebGLBuffer): void;
+  deleteProgram(program: WebGLProgram): void;
+  deleteRenderbuffer(renderbuffer: WebGLRenderbuffer): void;
+  deleteShader(shader: WebGLShader): void;
+  detachShader(program: WebGLProgram, shader: WebGLShader): void;
+
+
   drawArrays(mode: GLenum, first: number, count: number): void;
   enableVertexAttribArray(index: number): void; //enable sending array data to an attribute; use getAttribLocation to get index
   getAttribLocation(progra: WebGLProgram, name: string): number;
