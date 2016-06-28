@@ -4,7 +4,7 @@
 set nocompatible              " be iMproved, required
 " don't create and leave temp files
 set noswapfile
-set nowritebackup " was causing issues with file watcher
+set nowritebackup "was causing issues with file watcher
 " highlight search results 
 set hlsearch
 " Improve tab completion in command bar
@@ -67,6 +67,18 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 
 command! W w
 
+""""""""""""""""""""""""""""""
+" MAC INTEGRATION
+""""""""""""""""""""""""""""""
+
+set guifont=Source_Code_Pro_Medium:h12 " Font family and font size.
+
+" mouse support in all modes
+set mouse=a
+" yank to clipboard
+set clipboard+=unnamed
+set clipboard-=autoselect
+
 """""""""""""""
 " PLUGINS
 """"""""""""""
@@ -97,7 +109,6 @@ nmap <leader>1 :call SetStonewashedTheme('dark')<CR>
 nmap <leader>2 :call SetStonewashedTheme('light')<CR>
 nmap <leader>f :Autoformat<CR>
 
-set guifont=Source_Code_Pro_Medium:h12 " Font family and font size.
 """""""""""""""
 " SOURCE OTHER RC FILES HERE 
 """"""""""""""
@@ -120,8 +131,6 @@ filetype plugin indent on    " required
 """"""""""""""""
 " EXPERIMENTAL
 """"""""""""""""
-
-
 " see https://github.com/adampasz/stonewashed-themes
 function! SetStonewashedTheme(background)
   let themeName = 'stonewashed'
@@ -138,10 +147,11 @@ function! SetStonewashedTheme(background)
     let themeName .= "-gui"
   else
     set t_Co=256
+    "fix tmux
+    set t_ut=
     let themeName .= "-256"
   endif
   execute "colorscheme " . themeName
 " make cursorlines brighter in insert mode
-  
 endfunction
 call SetStonewashedTheme("dark")
