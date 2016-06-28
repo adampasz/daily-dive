@@ -155,3 +155,9 @@ function! SetStonewashedTheme(background)
 " make cursorlines brighter in insert mode
 endfunction
 call SetStonewashedTheme("dark")
+
+" TMUX Show File Name
+" rename window on quit
+autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " . expand("%:t"))
+let tmuxtitle = system("tmux display-message -p '#W'")
+autocmd VimLeave * call system("tmux rename-window " . tmuxtitle)
