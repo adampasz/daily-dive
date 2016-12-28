@@ -14,6 +14,7 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'Shougo/vimproc.vim' " Need to run `make` manually
 
 Plugin 'Chiel92/vim-autoformat'
+nmap <leader>f :Autoformat<CR>
 
 Plugin 'Quramy/tsuquyomi' 
 let g:tsuquyomi_completion_detail = 1
