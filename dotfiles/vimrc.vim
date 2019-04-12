@@ -56,9 +56,12 @@ let &t_ZR="\e[23m"
 " inoremap <S-TAB> <C-X><C-O>
 nnoremap } :bnext<CR>
 nnoremap { :bprevious<CR>
+" https://stackoverflow.com/questions/24902724/how-to-move-around-buffers-in-vim
+nnoremap \| :ls<CR>:buffer<Space>
 
 let mapleader = "\\"
 nmap <silent> <leader>- :bd<CR>  
+nmap <silent> <leader>_ :bd!<CR>  
 nmap <silent> <leader>= :wincmd w<CR>
 nmap <silent> <leader>+ :only<CR>
 let mapleader = ","
@@ -108,6 +111,8 @@ nmap <leader>, :BuffergatorToggle<CR>
 nmap <leader>1 :call SetStonewashedTheme('dark')<CR>
 nmap <leader>2 :call SetStonewashedTheme('light')<CR>
 
+vnoremap <leader>en :!python -c 'import sys,urllib;print urllib.quote(sys.stdin.read().strip())'<cr>
+vnoremap <leader>de :!python -c 'import sys,urllib;print urllib.unquote(sys.stdin.read().strip())'<cr>
 """""""""""""""
 " SOURCE OTHER RC FILES HERE 
 """"""""""""""
@@ -116,20 +121,19 @@ if filereadable(expand('~/.vim/rcs/js-vimrc.vim'))
 endif
 
 if filereadable(expand('~/.vimrc.local'))
-  " source ~/.vimrc.local
+  source ~/.vimrc.local
 endif
-
-
 
 " END PLUGINS
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-
 """"""""""""""""
 " EXPERIMENTAL
 """"""""""""""""
+
+
 " see https://github.com/adampasz/stonewashed-themes
 function! SetStonewashedTheme(background)
   let themeName = 'stonewashed'
@@ -153,7 +157,7 @@ function! SetStonewashedTheme(background)
   execute "colorscheme " . themeName
 " make cursorlines brighter in insert mode
 endfunction
-call SetStonewashedTheme("dark")
+call SetStonewashedTheme("light")
 
 " TMUX Show File Name
 " rename window on quit
